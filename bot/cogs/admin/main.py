@@ -1,4 +1,4 @@
-from nextcord.ext.commands import Cog, Bot, command
+from nextcord.ext.commands import Cog, Bot
 from nextcord import Interaction
 import nextcord
 
