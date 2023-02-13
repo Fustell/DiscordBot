@@ -4,7 +4,9 @@ import nextcord
 
 
 class Code(nextcord.ui.Modal):
-    def __init__(self):
+    def __init__(self, bot):
+        self.bot = bot
+
         super().__init__(
             "Code runner"
         )
@@ -13,7 +15,7 @@ class Code(nextcord.ui.Modal):
             label="Description",
             style=nextcord.TextInputStyle.paragraph,
             placeholder="Run some code here",
-            required=False,
+            required=True,
             max_length=1800,
         )
         self.add_item(self.description)
@@ -33,7 +35,7 @@ class __MainAdminCog(Cog):
 
     @nextcord.slash_command(name="code", description="Run some code")
     async def code(self, interaction: Interaction):
-        modal = Code()
+        modal = Code(self.bot)
         await interaction.response.send_modal(modal)
 
 
