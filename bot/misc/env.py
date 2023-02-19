@@ -4,4 +4,6 @@ from typing import Final
 
 
 class Env(ABC):
-    TOKEN: Final = os.environ.get('TOKEN', 'define me!')
+    TOKEN: Final = os.environ.get('DISCORD_TOKEN', 'define me!')
+    OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY','define me!')
+    TESTING_GUILD_ID = os.environ.get('TESTING_GUILD_ID','define me!')
