@@ -1,10 +1,7 @@
 import nextcord
 from nextcord.ext.commands import Cog, Bot, command
 
-from bot.misc import Env
-from bot.utils.GPTHandler import GPTHandler
-
-TESTING_GUILD_ID = Env.TESTING_GUILD_ID
+TESTING_GUILD_ID = 954101176532615408
 
 
 # todo: UserCogs
