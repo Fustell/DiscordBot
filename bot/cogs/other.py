@@ -23,20 +23,22 @@ class __MainOtherCog(Cog):
               f'{len(self.bot.guilds)} servers')
 
     @Cog.listener()
-    async def on_message(self, message: str):
-
-        # developers = ["292963893725102080"]
-        #
-        # if str(message.author.id) not in developers:
-        #     return
+    async def on_message(self, message):
 
         if message.author.bot:
             return
 
         if message.guild.id == TESTING_GUILD_ID and message.channel.id == 1076864191379550248:
             answer_message = await message.channel.send("`Очікуйте, бот генерує відповідь`")
-            response = await chatGPT.make_response(message.content)
+            response = await chatGPT.make_response(message.content, message.author.id)
             await answer_message.edit(content=response)
+
+    @Cog.listener()
+    async def on_member_join(self, member):
+        guild = member.guild
+        if guild.system_channel is not None:
+            to_send = f"Користувач {member.mention} приєднався до серверу"
+            await guild.system_channel.send(to_send)
 
 
 def register_other_cogs(bot: Bot) -> None:

@@ -8,6 +8,7 @@ from bot.database.models import register_models
 
 def start_bot():
     intents = Intents.default()
+    intents.members = True
     intents.message_content = True
 
     bot = Bot(Config.CMD_PREFIX, intents=intents)
