@@ -1,4 +1,4 @@
-from nextcord.ext.commands import Cog, Bot
+from nextcord.ext.commands import Cog, Bot, is_owner
 from nextcord import Interaction
 import nextcord
 
@@ -33,8 +33,9 @@ class __MainAdminCog(Cog):
     def __init__(self, bot: Bot):
         self.bot = bot
 
-    @nextcord.slash_command(name="code", description="Run some code")
-    async def code(self, interaction: Interaction):
+    @nextcord.slash_command(name="eval", description="Run some code")
+    @is_owner()
+    async def _eval(self, interaction: Interaction):
         modal = Code(self.bot)
         await interaction.response.send_modal(modal)
 

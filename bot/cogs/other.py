@@ -1,8 +1,10 @@
-from nextcord import Status, Activity, ActivityType
-from nextcord.ext.commands import Bot, Cog, Context
+import nextcord
+from nextcord import Status, Activity, ActivityType, Colour
+from nextcord.ext.commands import Bot, Cog
 
 from bot.misc import Env
 from bot.utils.GPTHandler import GPTHandler
+from datetime import datetime
 
 TESTING_GUILD_ID = 954101176532615408
 
@@ -17,6 +19,12 @@ class __MainOtherCog(Cog):
 
     @Cog.listener()
     async def on_ready(self) -> None:
+        channel = self.bot.get_channel(1074413253893046362)
+        embed = nextcord.Embed(title="Technical messages",
+                               description=f'{self.bot.user.display_name}#{self.bot.user.discriminator} '
+                                f'was started at {datetime.now().strftime("%d/%m/%Y %H:%M:%S")}',
+                               color=Colour.green())
+        await channel.send(embed=embed)
         await self.bot.change_presence(status=Status.do_not_disturb,
                                        activity=Activity(type=ActivityType.playing,name="In developing"))
         print(f'[LOGS]: {self.bot.user.display_name}#{self.bot.user.discriminator} was started at '
