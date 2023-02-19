@@ -25,10 +25,10 @@ class __MainOtherCog(Cog):
     @Cog.listener()
     async def on_message(self, message: str):
 
-        developers = ["292963893725102080"]
-
-        if str(message.author.id) not in developers:
-            return
+        # developers = ["292963893725102080"]
+        #
+        # if str(message.author.id) not in developers:
+        #     return
 
         if message.author.bot:
             return
