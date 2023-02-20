@@ -36,13 +36,17 @@ class __MainOtherCog(Cog):
         if message.author.bot:
             return
 
+        if not message.content.strip().startswith("!"):
+            return
+
         if len(message.content.strip())<10:
             return message.channel.send(content="`Мінімальна довжина запиту 10 символа`")
 
         if message.channel.name == "🤖chatgpt🤖" :
             try:
+                promt = message.content[1::]
                 answer_message = await message.channel.send("`Очікуйте, бот генерує відповідь`")
-                response = await chatGPT.make_response(message.content, message.author.id)
+                response = await chatGPT.make_response(promt, message.author.id)
                 await answer_message.edit(content=response)
             except Exception as e:
                 embed = nextcord.Embed(title=f"Error occured", description=f"{str(e)}", color=0xff0000)
