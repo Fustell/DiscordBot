@@ -36,13 +36,22 @@ class __MainOtherCog(Cog):
         if message.author.bot:
             return
 
-        if message.content == "":
-            return
+        if len(message.content.strip())<10:
+            return message.channel.send(content="`Мінімальна довжина запиту 10 символа`")
 
-        if message.channel.id == 1076864191379550248 or message.channel.id == 1077008493187453018:
-            answer_message = await message.channel.send("`Очікуйте, бот генерує відповідь`")
-            response = await chatGPT.make_response(message.content, message.author.id)
-            await answer_message.edit(content=response)
+        if message.channel.name == "🤖chatgpt🤖" :
+            try:
+                answer_message = await message.channel.send("`Очікуйте, бот генерує відповідь`")
+                response = await chatGPT.make_response(message.content, message.author.id)
+
+                embed = nextcord.Embed(title="Pan Roman GPT", description=f"{response}", color=0x19b0f0)
+                embed.set_footer(text="Created by Romko")
+                await answer_message.edit(embed=embed,content="")
+            except Exception as e:
+                embed = nextcord.Embed(title="{e.name}", description=f"{e.__traceback__}", color=0x19b0f0)
+                embed.set_footer(text="Created by Romko")
+                await message.channel.send.edit(embed=embed, content="")
+
 
     @Cog.listener()
     async def on_member_join(self, member):
