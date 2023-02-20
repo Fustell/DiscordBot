@@ -48,7 +48,7 @@ class __MainOtherCog(Cog):
                 embed.set_footer(text="Created by Romko")
                 await answer_message.edit(embed=embed,content="")
             except Exception as e:
-                embed = nextcord.Embed(title="f{e.name}", description=f"{str(e)}", color=0x19b0f0)
+                embed = nextcord.Embed(title=f"{e.name}", description=f"{str(e)}", color=0x19b0f0)
                 embed.set_footer(text="Created by Romko")
                 await message.channel.send(embed=embed, content="")
 
