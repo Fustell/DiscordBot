@@ -36,6 +36,9 @@ class __MainOtherCog(Cog):
         if message.author.bot:
             return
 
+        if message.content != "":
+            return
+
         if message.channel.id == 1076864191379550248 or message.channel.id == 1077008493187453018:
             answer_message = await message.channel.send("`Очікуйте, бот генерує відповідь`")
             response = await chatGPT.make_response(message.content, message.author.id)
