@@ -50,7 +50,7 @@ class __MainOtherCog(Cog):
             except Exception as e:
                 embed = nextcord.Embed(title="{e.name}", description=f"{e.__traceback__}", color=0x19b0f0)
                 embed.set_footer(text="Created by Romko")
-                await message.channel.send.edit(embed=embed, content="")
+                await message.channel.send(embed=embed, content="")
 
 
     @Cog.listener()
