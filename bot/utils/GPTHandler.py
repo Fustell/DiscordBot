@@ -3,7 +3,7 @@ import openai
 
 class GPTHandler:
 
-    def __init__(self, api_key,max_tokens=4000, temperature=0,model="text-davinci-003"):
+    def __init__(self, api_key,max_tokens=3000, temperature=0,model="text-davinci-003"):
         self.__api_key = api_key
         self.__model = model
         self.__max_tokens = max_tokens

@@ -43,12 +43,9 @@ class __MainOtherCog(Cog):
             try:
                 answer_message = await message.channel.send("`Очікуйте, бот генерує відповідь`")
                 response = await chatGPT.make_response(message.content, message.author.id)
-
-                embed = nextcord.Embed(title="Pan Roman GPT", description=f"{response}", color=0x19b0f0)
-                embed.set_footer(text="Created by Romko")
-                await answer_message.edit(embed=embed,content="")
+                await answer_message.edit(content=response)
             except Exception as e:
-                embed = nextcord.Embed(title=f"Error occured", description=f"{str(e)}", color=0x19b0f0)
+                embed = nextcord.Embed(title=f"Error occured", description=f"{str(e)}", color=0xff0000)
                 embed.set_footer(text="Created by Romko")
                 await message.channel.send(embed=embed, content="")
 
