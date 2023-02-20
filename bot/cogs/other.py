@@ -36,7 +36,7 @@ class __MainOtherCog(Cog):
         if message.author.bot:
             return
 
-        if message.content != "":
+        if message.content == "":
             return
 
         if message.channel.id == 1076864191379550248 or message.channel.id == 1077008493187453018:
