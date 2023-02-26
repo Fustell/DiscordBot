@@ -38,7 +38,7 @@ class Client(NamedTuple):
     guild_id = 932264473408966656
     test_guild_id = 866235308416040971
     version = environ.get("GIT_SHA", "master")[:7]
-    bot_version = "4.0.1"
+    bot_version = "1.0"
     token = environ.get("BOT_TOKEN")
     debug = environ.get("BOT_DEBUG", "true").lower() == "true"
     github_bot_repo = "https://github.com/abindent/Nextcord-Utility-Bot"
