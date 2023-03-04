@@ -1,4 +1,6 @@
+import io
 import os
+import traceback
 from datetime import datetime
 
 import nextcord
@@ -29,9 +31,16 @@ class ChatGPTListener(commands.Cog):
 
         if message.channel.name == "🤖chatgpt🤖":
             try:
+                chatgpt_log = self.bot.get_channel(1081352502995333250)
+                chatgpt_embed = nextcord.Embed(title=f"ChatGPT Log",
+                                               description=f"```\nUSERNAME: {message.author.display_name}"
+                                                           f"\nID: {message.author.id}\nSERVER NAME: {message.guild.name}"
+                                                           f"\nSERVER ID: {message.guild.id}```",
+                                               timestamp=datetime.utcnow(),
+                                               color=0x069e03)
+                await chatgpt_log.send(embed=chatgpt_embed)
                 reply_message = await message.channel.send("`Очікуйте, бот генерує відповідь`")
                 prompt = message.content[1::]
-                test_message = ""
                 response = await chatGPT.make_response(prompt, message.author.id)
                 n = 2000
                 divided_messages = [response[i:i + n] for i in range(0, len(response), n)]
@@ -43,12 +52,17 @@ class ChatGPTListener(commands.Cog):
                     embed.set_footer(text="Created by Romko")
                     embed.set_author(name=message.author.display_name)
                     await message.channel.send(embed=embed)
+
+                    chatgpt_embed = nextcord.Embed(title=f"ChatGPT Log",
+                                           description=f"```\nThis is answer to the prompt: {prompt}\nANSWER: {i}```",
+                                           timestamp=datetime.utcnow(),
+                                           color=0x069e03)
+                    await chatgpt_log.send(embed=chatgpt_embed)
                 await reply_message.delete()
             except Exception as e:
-                embed = nextcord.Embed(title=f"Error occured",
-                                       description=f"{str(e)}",
+                error_log = self.bot.get_channel(1080185530911830086)
+                embed = nextcord.Embed(title=f"ChatGPT Error",
+                                       description=f"```py\n{io.StringIO().getvalue()}{traceback.format_exc()}\n```",
                                        timestamp=datetime.utcnow(),
                                        color=0xff0000)
-                embed.set_author(name=message.author.display_name)
-                embed.set_footer(text="Created by Romko")
-                await message.channel.send(embed=embed, content="")
+                await error_log.send(embed=embed, content="")

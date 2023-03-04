@@ -34,7 +34,7 @@ log = logging.getLogger(__name__)
 
 class Client(NamedTuple):
     name = "Nextcord Template Bot"
-    default_prefix = "t!"
+    default_prefix = "/"
     guild_id = 932264473408966656
     test_guild_id = 866235308416040971
     version = environ.get("GIT_SHA", "master")[:7]

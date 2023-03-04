@@ -12,6 +12,8 @@ class ModalEval(nextcord.ui.Modal):
         super().__init__(title="Evaluate code", custom_id="evaluate_code")
 
         self._last_result: Optional[Any] = None
+        self.value: str = None
+        self.error_log: str = None
 
         self.add_item(
             nextcord.ui.TextInput(
@@ -61,8 +63,11 @@ class ModalEval(nextcord.ui.Modal):
                 res = await func()
 
         except Exception as e:
-            value = stdout.getvalue()
-            await inter.response.send_message(f'```py\n{value}{traceback.format_exc()}\n```')
+            self.value = stdout.getvalue()
+            self.error_log = traceback.format_exc()
+            embed = nextcord.Embed(title="Code Status", description=":x: An error occurred.", color=0xFF0000)
+            embed.add_field(name=":warning: The Error", value=f"```py\n{self.value}{self.error_log}\n```", inline=False)
+            await inter.response.send_message(embed=embed,ephemeral=True)
 
         else:
             value = stdout.getvalue()
@@ -86,10 +91,11 @@ class ModalEval(nextcord.ui.Modal):
         await inter.response.send_message(embed=embed, view=view)
 
     async def on_error(self, error, interaction: nextcord.Interaction):
-        view = DelBtn(interaction)
+        error_channel = interaction.client.get_channel(1080185530911830086)
         embed = nextcord.Embed(title="Code Status", description=":x: An error occurred.", color=0xFF0000)
-        embed.add_field(name=":warning: The Error", value=f"```{error}```", inline=False)
-        await interaction.response.send_message(embed=embed, view=view)
+        embed.add_field(name=":desktop: Code", value=f"```py\n{self.children[0].value}\n```", inline=False)
+        embed.add_field(name=":warning: The Error", value=f"```py\n{self.value}{self.error_log}\n```", inline=False)
+        await error_channel.send(embed=embed)
 
 
 class Eval(commands.Cog, description='Evaluate Your Code.'):
