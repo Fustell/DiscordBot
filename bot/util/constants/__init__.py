@@ -33,15 +33,14 @@ log = logging.getLogger(__name__)
 
 
 class Client(NamedTuple):
-    name = "Nextcord Template Bot"
+    name = "Pan ROman"
     default_prefix = "/"
-    guild_id = 932264473408966656
-    test_guild_id = 866235308416040971
+    guild_id = 1078391337558229162
+    test_guild_id = 1078391337558229162
     version = environ.get("GIT_SHA", "master")[:7]
     bot_version = "1.0"
     token = environ.get("BOT_TOKEN")
     debug = environ.get("BOT_DEBUG", "true").lower() == "true"
-    github_bot_repo = "https://github.com/abindent/Nextcord-Utility-Bot"
     invite_permissions = nextcord.Permissions(
         view_channel=True,
         send_messages=True,
@@ -395,11 +394,6 @@ class RapidApi:
 
 class RedirectOutput:
     delete_delay: int = 10
-
-
-class Source:
-    github = Client.github_bot_repo
-    github_avatar_url = "https://avatars1.githubusercontent.com/u/9919"
 
 
 class Spotify:
