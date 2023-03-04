@@ -387,30 +387,14 @@ class Icons:
         "%3Fv%3D1/https/cdn.discordapp.com/emojis/654080405988966419.png?width=20&height=20"
     )
 
-
-class RapidApi:
-    joke_api = environ.get("JOKE_API")
-
-
 class RedirectOutput:
     delete_delay: int = 10
-
-
-class Spotify:
-    client_id = environ.get("SPOTIFY_CLIENT_ID")
-    client_secret = environ.get("SPOTIFY_CLIENT_SECRET")
 
 
 class Tokens(NamedTuple):
     secret_id = environ.get("secret_id")
     github = environ.get("GITHUB_TOKEN")
     topggtoken = environ.get('TOPGGTOKEN')
-
-
-class PasteBin(NamedTuple):
-    pastebin_pass = environ.get("PASTEBIN_PASS")
-    pastebin_developer_api_key = environ.get("PASTEBIN_API_KEY")
-
 
 # Bot replies
 ERROR_REPLIES = [

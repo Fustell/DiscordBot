@@ -32,15 +32,17 @@ class ChatGPTListener(commands.Cog):
         if message.channel.name == "🤖chatgpt🤖":
             try:
                 chatgpt_log = self.bot.get_channel(1081352502995333250)
+                reply_message = await message.channel.send("`Очікуйте, бот генерує відповідь`")
+                prompt = message.content[1::]
+
                 chatgpt_embed = nextcord.Embed(title=f"ChatGPT Log",
                                                description=f"```\nUSERNAME: {message.author.display_name}"
                                                            f"\nID: {message.author.id}\nSERVER NAME: {message.guild.name}"
-                                                           f"\nSERVER ID: {message.guild.id}```",
+                                                           f"\nSERVER ID: {message.guild.id}"
+                                                           f"\nPROMPT:{prompt}```",
                                                timestamp=datetime.utcnow(),
                                                color=0x069e03)
                 await chatgpt_log.send(embed=chatgpt_embed)
-                reply_message = await message.channel.send("`Очікуйте, бот генерує відповідь`")
-                prompt = message.content[1::]
                 response = await chatGPT.make_response(prompt, message.author.id)
                 n = 2000
                 divided_messages = [response[i:i + n] for i in range(0, len(response), n)]
