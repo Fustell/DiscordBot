@@ -104,6 +104,8 @@ class Eval(commands.Cog, description='Evaluate Your Code.'):
     def __init__(self, bot):
         self.bot = bot
 
+
     @nextcord.slash_command(name="eval", description="Evaluates the given python code")
+    @commands.is_owner()
     async def eval(self, interaction: nextcord.Interaction):
         await interaction.response.send_modal(modal=ModalEval())
