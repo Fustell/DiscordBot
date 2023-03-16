@@ -33,10 +33,11 @@ log = logging.getLogger(__name__)
 
 
 class Client(NamedTuple):
-    name = "Pan ROman"
+    name = "Pan Roman"
     default_prefix = "/"
     guild_id = 1078391337558229162
     test_guild_id = 1078391337558229162
+    developers = [1040739203111194724],
     version = environ.get("GIT_SHA", "master")[:7]
     bot_version = "1.0"
     token = environ.get("BOT_TOKEN")
